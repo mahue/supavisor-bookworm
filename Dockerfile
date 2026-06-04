@@ -56,7 +56,7 @@ RUN mix release supavisor
 # exim4 RCE CVE-2026-40687. Only installs runtime dependencies; no build tools.
 FROM ${RUNNER_IMAGE}
 
-RUN apt-get update -y && apt-get install -y \
+RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
     libstdc++6 \
     openssl \
     libncurses6 \
