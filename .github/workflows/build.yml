@@ -77,6 +77,9 @@ jobs:
           cache-to: type=gha,mode=max
           load: true
 
+      - name: Copy .trivyignore into supavisor source context
+        run: cp .trivyignore supavisor-src/.trivyignore
+
       - name: Install Trivy
         uses: aquasecurity/trivy-action@v0.36.0
         with:
@@ -84,11 +87,9 @@ jobs:
           format: "table"
           exit-code: "1"
           severity: "CRITICAL"
-          # Only fail on CVEs that have a fix available. Bookworm slim consistently
-          # carries unfixed CRITICAL CVEs (zlib1g CVE-2023-45853 will_not_fix; perl
-          # CVE-2026-42496/8376 unpatched upstream) that cannot be resolved by image
-          # rebuild — keeping ignore-unfixed:false makes CI permanently red.
-          ignore-unfixed: true
+          # Specific CVE suppressions are in .trivyignore (auditable, per-CVE rationale).
+          # No ignore-unfixed flag — future CVEs with fixes will still block CI.
+          trivyignores: .trivyignore
 
       - name: Push image (only on main/tags, only if Trivy passes)
         if: github.event_name != 'pull_request'
