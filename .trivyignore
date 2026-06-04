@@ -1,0 +1,19 @@
+# Trivy ignore file for ghcr.io/mahue/supavisor-bookworm
+# All suppressions approved by CTO decision 2026-06-04 (HUE-500)
+
+# CVE-2026-42496 (perl, perl-base, libperl5.36, perl-modules-5.36)
+# Path traversal via crafted symlinks (perl-archive-tar)
+# Status: affected — no fix available in Debian 12 (Bookworm)
+# Cannot remove perl: postgresql-client has a hard dependency on it
+CVE-2026-42496
+
+# CVE-2026-8376 (perl, perl-base, libperl5.36, perl-modules-5.36)
+# Heap buffer overflow in Perl compiler (Perl <= 5.43.10)
+# Status: affected — no fix available in Debian 12 (Bookworm)
+# Cannot remove perl: postgresql-client has a hard dependency on it
+CVE-2026-8376
+
+# CVE-2023-45853 (zlib1g)
+# Integer overflow in zipOpenNewFileInZip4_6
+# Status: will_not_fix — Debian maintainers will not backport a fix
+CVE-2023-45853

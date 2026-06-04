@@ -65,11 +65,16 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
     htop \
     postgresql-client \
     tini \
+  && apt-get install -y --only-upgrade libgnutls30 \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
   && apt-mark showmanual | sort
 
 # Explicitly verify exim4 is NOT installed (security gate)
 RUN ! dpkg -l exim4 2>/dev/null | grep -q "^ii"
+
+# Note: perl/libperl5.36/perl-modules-5.36 cannot be removed — postgresql-client
+# depends on them. CVE-2026-42496 and CVE-2026-8376 are suppressed via .trivyignore
+# per CTO decision 2026-06-04 (no fix available in Debian 12 either).
 
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 
