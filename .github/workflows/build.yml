@@ -78,7 +78,7 @@ jobs:
           load: true
 
       - name: Install Trivy
-        uses: aquasecurity/trivy-action@0.30.0
+        uses: aquasecurity/trivy-action@v0.30.0
         with:
           image-ref: "ghcr.io/mahue/supavisor-bookworm:2.9.7-bookworm"
           format: "table"
