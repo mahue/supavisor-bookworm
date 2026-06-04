@@ -6,7 +6,7 @@
 # Registry: ghcr.io/mahue/supavisor-bookworm
 
 ARG ELIXIR_VERSION=1.18.4
-ARG OTP_VERSION=27.3.4
+ARG OTP_VERSION=26.2.5.21
 ARG DEBIAN_VERSION=bookworm-20260518-slim
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
